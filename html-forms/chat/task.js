@@ -17,9 +17,13 @@ chat.addEventListener('click', (e) => {
 
 input.addEventListener('keydown', (e) => {
 
-    if (input.value == "" && e.key === 'Enter') {
+    if (input.value == '' && e.key === 'Enter') {
         return false;
-    }
+    } 
+    
+    if (input.value.match(/^[ ]+$/) && e.key === 'Enter') {
+      return false;
+    } 
 
     if (e.key === 'Enter') {
         messages.innerHTML += `<div class="message message_client">
