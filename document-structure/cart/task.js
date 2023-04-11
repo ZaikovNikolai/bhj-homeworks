@@ -23,40 +23,22 @@ for (let i = 0; i < inc.length; i++) {
 
 for (let i = 0; i < addButton.length; i++) {
   addButton[i].addEventListener('click', () => {
-    if (cardProducts.children.length === 0) {
-      cardProducts.insertAdjacentHTML('beforeEnd', 
-      `<div class="cart__product" data-id="${addButton[i].closest('.product').getAttribute('data-id')}">
-      <img class="cart__product-image" src="${images[i].getAttribute('src')}" alt="">
-      <div class="cart__product-count">${value[i].textContent}</div>
-      </div>
-      `)
-      return false;
-    }
-    let card;
-    for (let r = 0; r < cardProducts.children.length; r++) {
-      if (cardProducts.children[r].dataset.id === addButton[i].closest('.product').dataset.id) {
-        card = r;
-        break;
-      } else if (r === cardProducts.children.length) {
-        card = undefined
-        break
-      } else {
-        card = undefined
-      }
-    }
-      
-      if (card === undefined ) {
-        cardProducts.insertAdjacentHTML('beforeEnd', 
+    const carts = Array.from(document.getElementsByClassName('cart__product'));
+    const productInCard = carts.find(function(item) {
+     return item.dataset.id == addButton[i].closest('.product').dataset.id;
+    });
+    if(productInCard) {
+      productInCard.querySelector('.cart__product-count').textContent = Number(productInCard.querySelector('.cart__product-count').textContent) + Number(value[i].textContent);
+    } else {
+      cardProducts.insertAdjacentHTML('beforeend', 
         `<div class="cart__product" data-id="${addButton[i].closest('.product').getAttribute('data-id')}">
-        <img class="cart__product-image" src="${images[i].getAttribute('src')}" alt="">
-        <div class="cart__product-count">${value[i].textContent}</div>
+          <img class="cart__product-image" src="${images[i].getAttribute('src')}" alt="">
+          <div class="cart__product-count">${value[i].textContent}</div>
         </div>
-        `)
-        return false;
-      } else if (card >= 0) {
-        cardProducts.children[card].querySelector('.cart__product-count').textContent = Number(cardProducts.children[card].querySelector('.cart__product-count').textContent) + Number(value[i].textContent);
-        return false;
-  }    
-})
-  
+      `)
+
+    }
+  })
 }
+
+

@@ -5,20 +5,21 @@ let removeButton;
 
 button.addEventListener('click', (event) => {
   event.preventDefault();
-  if (input.value == '') {
+  const value = input.value;
+  if (value.trim() == '') {
     return false;
-  } else {
-    list.insertAdjacentHTML("beforeEnd",
-      `<div class="task">
-      <div class="task__title">
-        ${input.value}
-      </div>
-      <a href="#" class="task__remove">&times;</a>
-    </div>`
-    )
-   input.value = '';
-   removeButton = document.getElementsByClassName(`task__remove`);
-  }
+  } 
+
+  list.insertAdjacentHTML("beforeEnd",
+    `<div class="task">
+    <div class="task__title">
+      ${value}
+    </div>
+    <a href="#" class="task__remove">&times;</a>
+  </div>`
+  )
+  input.value = '';
+  removeButton = document.getElementsByClassName(`task__remove`);
 })
 
 list.addEventListener('click', (event) => {

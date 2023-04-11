@@ -11,12 +11,9 @@ hasTooltips.forEach(tooltips => {
   tooltips.addEventListener('click', (event) => {
     event.preventDefault();
     tooltips.insertAdjacentElement('afterEnd', tooltip);
-    if (tooltip.className == 'tooltip tooltip_active') {
-      tooltip.classList.remove('tooltip_active')
-    } else {
-      tooltip.classList.add('tooltip_active');
-    }
-    
+    if (tooltips.className == 'has-tooltip') {
+      tooltip.classList.toggle('tooltip_active')
+    } 
   })
 })
     
